@@ -1,0 +1,438 @@
+body {
+    background-color: rgb(41, 43, 74);
+}
+
+.chart-table {
+    box-shadow: inset 2px 2px 4px -1px darkgray;
+    border: 3px solid rgb(44, 46, 90);
+    background-color: rgb(44, 46, 90);
+}
+
+.chart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: auto;
+
+}
+
+.result-times {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.waiting {
+    margin-top: 10px;
+    padding: 5px;
+    animation: wait 2s infinite;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px -1px rgb(44, 46, 90);
+    cursor: pointer;
+    color: rgb(56, 41, 152);
+}
+
+.cash-out {
+    /* display: inline-block; */
+    margin-top: 10px;
+    padding: 5px;
+    animation: blink 3s infinite;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px -1px rgb(44, 46, 90);
+    cursor: pointer;
+    color: rgb(130, 109, 109);
+}
+
+@keyframes wait {
+
+    50% {
+        background-color: rgb(174, 85, 85);
+    }
+
+    50% {
+        background-color: rgb(15, 50, 154);
+        color: white;
+    }
+}
+
+@keyframes blink {
+
+    50% {
+        background-color: rgb(174, 85, 85);
+    }
+
+    50% {
+        background-color: rgb(248, 105, 105);
+        color: white;
+    }
+}
+
+.start {
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px -1px rgb(83, 102, 134);
+    cursor: pointer;
+    color: rgb(85, 125, 129);
+    background-color: whitesmoke;
+}
+
+.start:hover {
+    background-color: rgb(121, 177, 167);
+}
+
+.beat-list {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 5px;
+    align-items: center;
+}
+
+.beat-span {
+    font-size: 25px;
+    border: 1px solid;
+    color: white;
+    padding: 3px;
+    width: 70px;
+    text-align: center;
+    background-color: darkblue;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 20px -1px rgb(74, 74, 148);
+    border-color: rgb(143, 143, 250);
+}
+
+.beat-span-right {
+    font-size: 25px;
+    border: 1px solid;
+    color: white;
+    padding: 3px;
+    width: 70px;
+    text-align: center;
+    background-color: darkblue;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 20px -1px rgb(74, 74, 148);
+    border-color: rgb(143, 143, 250);
+}
+
+/* Define custom classes with unique background colors */
+.color1 {
+    background-color: rgb(54, 82, 35);
+}
+
+.color1:hover {
+    background-color: rgb(73, 114, 45);
+}
+
+.color2 {
+    background-color: blue;
+}
+
+.color2:hover {
+    background-color: rgb(83, 83, 236);
+}
+
+.color3 {
+    background-color: red;
+}
+
+.color3:hover {
+    background-color: rgb(126, 8, 8);
+}
+
+.color4 {
+    background-color: green;
+}
+
+.color4:hover {
+    background-color: rgb(12, 76, 12);
+}
+
+.color5 {
+    background-color: rgb(82, 82, 15);
+}
+
+.color5:hover {
+    background-color: rgb(137, 137, 12);
+}
+
+.color6 {
+    background-color: orange;
+}
+
+.color6:hover {
+    background-color: rgb(186, 138, 47);
+}
+
+.plus {
+    font-size: 35px;
+    padding: 3px, 5px, 3px, 5px;
+    width: 50px;
+    font-weight: bold;
+    color: lightblue;
+    box-shadow: inset 2px 2px 4px -1px rgb(142, 167, 208);
+    text-align: center;
+    background-color: rgb(63, 79, 20);
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.plus:hover {
+    background-color: rgb(111, 136, 39);
+}
+
+.minus {
+    font-size: 35px;
+    padding: 0, 5px, 0, 5px;
+    width: 50px;
+    font-weight: bold;
+    color: rgb(71, 28, 158);
+    box-shadow: inset 2px 2px 4px -1px rgb(142, 167, 208);
+    text-align: center;
+    background-color: rgb(57, 186, 74);
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.minus:hover {
+    background-color: rgb(32, 117, 42);
+}
+
+.plus-minus {
+    margin-left: 270px;
+    margin-top: -60px;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 5px;
+}
+
+.number {
+    display: inline-block;
+}
+
+.number input {
+    height: 30px;
+    width: 80px;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 3px;
+    border: 1px;
+    border-color: rgb(165, 165, 219);
+    border-radius: 15px;
+    box-shadow: inset 1px 1px 14px -1px rgb(81, 81, 167);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.lose img {
+    width: 210px;
+    height: auto;
+    position: absolute;
+    top: 8.3%;
+    left: 35%;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.game-name {
+    position: absolute;
+    float: left;
+    font-size: 30px;
+    padding: 8px;
+    box-shadow: inset 1px 1px 3px -1px rgb(142, 167, 208);
+    border-radius: 5px;
+}
+
+.game-name label {
+    padding: 3px;
+    color: rgb(84, 84, 193);
+}
+
+.span-name {
+    color: whitesmoke;
+}
+
+.image {
+    margin-left: 10%;
+}
+
+.dashBoard {
+    float: right;
+    /* margin-top: -21.5%; */
+    top: 1%;
+    left: 100%;
+    margin-left: -150px;
+    font-size: 25px;
+    padding: 8px;
+    box-shadow: inset 2px 2px 4px -1px rgb(24, 215, 148);
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    color: rgb(107, 144, 166);
+    position: absolute;
+
+}
+
+.dashBoard span {
+    padding: 0px 10px 0px 10px;
+}
+
+.dashBoard:hover {
+    background-color: rgb(55, 57, 93);
+    color: rgb(186, 215, 232);
+}
+
+.betting-area {
+    /* filter: blur(1px); */
+    background-color: rgb(192, 192, 192);
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 20px -1px rgb(140, 140, 226);
+}
+
+.progress-bar-content {
+    margin-left: calc(100% - 275px);
+    margin-top: -50px;
+}
+
+.progress-x span {
+    font-weight: bold;
+}
+
+.content-x {
+    text-align: center;
+}
+
+.progress-bar {
+    width: 95%;
+    cursor: pointer;
+}
+
+.progress-label {
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.you-lose {
+    background-color: darkgray;
+    width: 26%;
+    text-align: center;
+    padding: 6px 0px 6px 0px;
+    margin-top: -28%;
+    margin-left: 36%;
+    position: absolute;
+    font-size: 30px;
+    box-shadow: inset 2px 2px 25px -1px rgb(144, 47, 47);
+    border-radius: 10px;
+}
+
+.balance-container {
+    text-align: center;
+}
+
+.balance {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 45px;
+}
+
+.hr {
+    width: 15%;
+}
+
+.balance-label {
+    font-size: 20px;
+    color: white;
+}
+
+/* responsive classes */
+@media screen and (max-width: 900px) {
+    .chart {
+        width: 94%;
+    }
+
+    .result-times {
+        top: 25%;
+        left: 25%;
+    }
+
+    .image {
+        /* margin-left: 13%; */
+        margin-left: -10px;
+        text-align: center;
+    }
+
+    .game-name {
+        font-size: 25px;
+    }
+
+    .lose img {
+        left: 35%;
+        width: 150px;
+        background-color: red;
+        border-radius: 50%;
+        top: 15px;
+    }
+
+    .you-lose {
+        /* margin-left: 10px; */
+        left: 2.4%;
+        top: 70%;
+    }
+
+    /* progress bar */
+    .progress-bar-content {
+        /* margin-left: ;
+        margin-top: -50px; */
+        padding: 10px;
+        margin-top: 40px;
+        margin-left: 0;
+        text-align: center;
+        background-color: rgb(57, 60, 123);
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 10px -1px;
+    }
+
+    .progress-x span {
+        font-weight: bold;
+    }
+
+    .content-x {
+        text-align: center;
+        color: #ccc
+    }
+
+    .progress-bar {
+        width: 80%;
+    }
+
+    .progress-label {
+        color: #ccc;
+    }
+
+    /* balance */
+    .balance {
+        margin-top: 4px;
+    }
+}
