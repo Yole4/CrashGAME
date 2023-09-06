@@ -368,11 +368,28 @@ input[type="number"]::-webkit-outer-spin-button {
 /* responsive classes */
 @media screen and (max-width: 900px) {
 
-    .chart-table{
-        height: 240px;
+    .chart-table {
+        height: 190px;
     }
+
     .plus-minus {
-        margin-left: 250px;
+        margin-left: 185px;
+    }
+
+    .plus {
+        font-size: 35px;
+        padding: 3px, 5px, 3px, 5px;
+        width: 40px;
+    }
+
+    .number input {
+        font-size: 23px;
+        width: 70px;
+    }
+
+    .minus {
+        font-size: 35px;
+        width: 40px;
     }
 
     .chart {
@@ -443,4 +460,16 @@ input[type="number"]::-webkit-outer-spin-button {
     .balance {
         margin-top: 4px;
     }
+
+    /* bet list */
+    .beat-span {
+        font-size: 24px;
+        width: 45px;
+    }
+
+    .beat-span-right {
+        font-size: 24px;
+        width: 45px;
+    }
+
 }
