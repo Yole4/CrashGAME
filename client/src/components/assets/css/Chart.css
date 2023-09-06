@@ -368,6 +368,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* responsive classes */
 @media screen and (max-width: 900px) {
+
+    .plus-minus {
+        margin-left: 250px;
+    }
+    
     .chart {
         width: 94%;
     }
