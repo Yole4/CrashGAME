@@ -6,6 +6,7 @@ body {
     box-shadow: inset 2px 2px 4px -1px darkgray;
     border: 3px solid rgb(44, 46, 90);
     background-color: rgb(44, 46, 90);
+    height: 387px;
 }
 
 .chart {
@@ -14,8 +15,6 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    height: auto;
-
 }
 
 .result-times {
@@ -369,12 +368,16 @@ input[type="number"]::-webkit-outer-spin-button {
 /* responsive classes */
 @media screen and (max-width: 900px) {
 
+    .chart-table{
+        height: 240px;
+    }
     .plus-minus {
         margin-left: 250px;
     }
-    
+
     .chart {
         width: 94%;
+        top: 42%;
     }
 
     .result-times {
