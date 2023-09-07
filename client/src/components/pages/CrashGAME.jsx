@@ -169,7 +169,7 @@ function CrashGAME() {
     const start = () => {
 
         if (number > balance) {
-            alert("Low funds alert!");
+            alert("Low Balance!");
             setNumber(0);
         }
         else {
