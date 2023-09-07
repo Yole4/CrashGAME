@@ -210,7 +210,7 @@ function CrashGAME() {
 
         coins.play();
         setExpandBalance(true);
-        setBalance((number * parseInt(resultTimes)) + balance);
+        setBalance(parseInt((number * resultTimes) + balance));
         setTimeout(() => {
             setExpandBalance(false);
         }, 1000);
