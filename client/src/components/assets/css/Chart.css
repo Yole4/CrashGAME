@@ -477,7 +477,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @media screen and (max-width: 350px) {
     .plus-minus {
-        margin-left: 175px;
+        margin-left: 162px;
     }
 
     .plus {
@@ -491,5 +491,19 @@ input[type="number"]::-webkit-outer-spin-button {
 
     .minus {
         width: 35px;
+    }
+
+     /* bet list */
+     .beat-span {
+        font-size: 20px;
+        width: 40px;
+    }
+
+    .beat-span-right {
+        font-size: 20px;
+        width: 40px;
+    }
+    .betting-area {
+        height: 70px;
     }
 }
