@@ -167,40 +167,49 @@ function CrashGAME() {
 
     // start button
     const start = () => {
-        // conditions or random number for stop
-        const randomNumber = Math.random() * 100;
 
-        if (randomNumber <= 95) {
-            // 95% chance
-            const random = Math.floor(Math.random() * 6) + 1;
-            setRandNumber(random);
-        // } else if (randomNumber <= 95) {
-        //     // 10% chance
-        //     const random = Math.floor(Math.random() * 5) + 6;
-        //     setRandNumber(random);
-        } else {
-            // 5% chace
-            const random = Math.floor(Math.random() * 20) + 6;
-            setRandNumber(random);
+        if (number > balance) {
+            alert("Low funds alert!");
+            setNumber(0);
         }
+        else {
 
-        // reset the datasets
-        setChartData(initialData);
+            // conditions or random number for stop
+            const randomNumber = Math.random() * 100;
 
-        // play the audio
-        audio.play();
-        setButtonStart(true);
-        setCashOut(true);
+            if (randomNumber <= 85) {
+                // 85% chance
+                const random = Math.floor(Math.random() * 6) + 1;
+                setRandNumber(random);
+            } else if (randomNumber <= 95) {
+                // 10% chance
+                const random = Math.floor(Math.random() * 5) + 6;
+                setRandNumber(random);
+            } else {
+                // 10% chace
+                const random = Math.floor(Math.random() * 20) + 11;
+                setRandNumber(random);
+            }
 
-        // hide failed image
-        setFailedImage(false);
+            // reset the datasets
+            setChartData(initialData);
 
-        // deduct the balance
-        if (balance > number) {
-            setBalance(balance - number);
+            // play the audio
+            audio.play();
+            setButtonStart(true);
+            setCashOut(true);
+
+            // hide failed image
+            setFailedImage(false);
+
+            // deduct the balance
+            if (balance > number) {
+                setBalance(balance - number);
+            }
+
+            setProgressValue(progress);
+
         }
-
-        setProgressValue(progress);
     };
 
     // cashout button
@@ -362,7 +371,7 @@ function CrashGAME() {
                     </div>
                     <div className='balance-container'>
                         <div className='balance'>
-                            <span style={{ fontSize: expandBalance ? '40px' : '30px', color: expandBalance ? 'red' : 'violet'}}>{balance}</span>
+                            <span style={{ fontSize: expandBalance ? '40px' : '30px', color: expandBalance ? 'red' : 'violet' }}>{balance}</span>
                         </div>
                         <hr className='hr' />
                         <span className='balance-label'>Balance</span>
@@ -380,7 +389,7 @@ function CrashGAME() {
                     <img src={crash} />
                 </div>
                 <div className='dashBoard'>
-                    <img src={menu}/>
+                    <img src={menu} />
                 </div>
             </div>
 
