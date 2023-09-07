@@ -6,12 +6,17 @@ import crash from '../assets/images/crash.png';
 import lose from '../assets/images/lose.png';
 import onPlay from '../assets/sound/onPlay.mp3';
 import error from '../assets/sound/error.mp3';
+import buttonClick from '../assets/sound/button click.mp3';
+import buttonClickCoins from '../assets/sound/coins.mp3';
+import menu from '../assets/images/menu.png';
 
 function CrashGAME() {
 
     // audio sound on play
     const [audio] = useState(new Audio(onPlay));
     const [audioFailed] = useState(new Audio(error));
+    const [clicked] = useState(new Audio(buttonClick));
+    const [coins] = useState(new Audio(buttonClickCoins));
 
     // initialize label on x and y axes
     const [resultTimes, setResultTimes] = useState(1);
@@ -70,7 +75,7 @@ function CrashGAME() {
         labels: [],
         datasets: [
             {
-                label: 'Progress',
+                label: 'Height (1n cm)',
                 data: [], // Empty array for data points
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 5,
@@ -141,6 +146,9 @@ function CrashGAME() {
                             // play failed audio
                             audioFailed.play();
                             setFailedImage(true);
+                            setTimeout(() => {
+                                setFailedImage(false);
+                            }, 5000);
                         }
                     }
                 } else {
@@ -154,6 +162,8 @@ function CrashGAME() {
             };
         }
     }, [buttonStart, animationData]);
+
+    const [expandBalance, setExpandBalance] = useState(false); // expand balance number
 
     // start button
     const start = () => {
@@ -169,7 +179,7 @@ function CrashGAME() {
             const random = Math.floor(Math.random() * 5) + 6;
             setRandNumber(random);
         } else {
-            // 5% chance
+            // 10% chace
             const random = Math.floor(Math.random() * 20) + 11;
             setRandNumber(random);
         }
@@ -186,10 +196,9 @@ function CrashGAME() {
         setFailedImage(false);
 
         // deduct the balance
-        if (balance > number){
+        if (balance > number) {
             setBalance(balance - number);
         }
-        setNumber(0);
 
         setProgressValue(progress);
     };
@@ -199,7 +208,12 @@ function CrashGAME() {
         setCashOut(false);
         setWaiting(true);
 
+        coins.play();
+        setExpandBalance(true);
         setBalance((number * parseInt(resultTimes)) + balance);
+        setTimeout(() => {
+            setExpandBalance(false);
+        }, 1000);
     }
 
 
@@ -255,7 +269,8 @@ function CrashGAME() {
                     },
                     font: {
                         size: 18
-                    }
+                    },
+
                 },
             },
 
@@ -304,34 +319,34 @@ function CrashGAME() {
 
                 <div className='betting-area' style={{ alignItems: 'center', pointerEvents: buttonStart ? 'none' : '', filter: buttonStart ? 'blur(0.5px)' : '' }}>
                     <div className='beat-list'>
-                        <div className='beat-span color1' onClick={() => setNumber(1)}>
+                        <div className='beat-span color1' onClick={() => { setNumber(1); clicked.play(); }}>
                             <span>1</span>
                         </div>
-                        <div className='beat-span-right color2' onClick={() => setNumber(10)}>
+                        <div className='beat-span-right color2' onClick={() => { setNumber(10); clicked.play(); }}>
                             <span>10</span>
                         </div>
-                        <div className='beat-span color3' onClick={() => setNumber(20)}>
+                        <div className='beat-span color3' onClick={() => { setNumber(20); clicked.play(); }}>
                             <span>20</span>
                         </div>
-                        <div className='beat-span-right color4' onClick={() => setNumber(50)}>
+                        <div className='beat-span-right color4' onClick={() => { setNumber(50); clicked.play(); }}>
                             <span>50</span>
                         </div>
-                        <div className='beat-span color5' onClick={() => setNumber(100)}>
+                        <div className='beat-span color5' onClick={() => { setNumber(100); clicked.play(); }}>
                             <span>100</span>
                         </div>
-                        <div className='beat-span-right color6' onClick={() => setNumber(200)}>
+                        <div className='beat-span-right color6' onClick={() => { setNumber(200); clicked.play(); }}>
                             <span>200</span>
                         </div>
                     </div>
 
                     <div className='plus-minus'>
-                        <div className='minus' onClick={() => setNumber(number - 1)}>
+                        <div className='minus' onClick={() => { setNumber(number - 1); clicked.play() }}>
                             <span>-</span>
                         </div>
                         <div className='number'>
                             <input type="number" value={number} onChange={(e) => setNumber(e.target.value)} />
                         </div>
-                        <div className='plus' onClick={() => setNumber(number + 1)}>
+                        <div className='plus' onClick={() => { setNumber(number + 1); clicked.play() }}>
                             <span style={{ pointerEvents: 'none' }}>+</span>
                         </div>
                     </div>
@@ -347,7 +362,7 @@ function CrashGAME() {
                     </div>
                     <div className='balance-container'>
                         <div className='balance'>
-                            <span style={{ fontSize: '30px', color: 'violet' }}>{balance}</span>
+                            <span style={{ fontSize: expandBalance ? '40px' : '30px', color: expandBalance ? 'red' : 'violet'}}>{balance}</span>
                         </div>
                         <hr className='hr' />
                         <span className='balance-label'>Balance</span>
@@ -365,7 +380,7 @@ function CrashGAME() {
                     <img src={crash} />
                 </div>
                 <div className='dashBoard'>
-                    <span>Dashboard</span>
+                    <img src={menu}/>
                 </div>
             </div>
 
