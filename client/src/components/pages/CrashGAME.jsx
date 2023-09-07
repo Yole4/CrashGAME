@@ -203,7 +203,7 @@ function CrashGAME() {
             setFailedImage(false);
 
             // deduct the balance
-            if (balance > number) {
+            if (balance >= number) {
                 setBalance(balance - number);
             }
 
