@@ -170,17 +170,17 @@ function CrashGAME() {
         // conditions or random number for stop
         const randomNumber = Math.random() * 100;
 
-        if (randomNumber <= 85) {
-            // 85% chance
+        if (randomNumber <= 95) {
+            // 95% chance
             const random = Math.floor(Math.random() * 6) + 1;
             setRandNumber(random);
-        } else if (randomNumber <= 95) {
-            // 10% chance
-            const random = Math.floor(Math.random() * 5) + 6;
-            setRandNumber(random);
+        // } else if (randomNumber <= 95) {
+        //     // 10% chance
+        //     const random = Math.floor(Math.random() * 5) + 6;
+        //     setRandNumber(random);
         } else {
-            // 10% chace
-            const random = Math.floor(Math.random() * 20) + 11;
+            // 5% chace
+            const random = Math.floor(Math.random() * 20) + 6;
             setRandNumber(random);
         }
 
