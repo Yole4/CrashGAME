@@ -236,12 +236,12 @@ body {
     box-shadow: inset 1px 1px 14px -1px rgb(81, 81, 167);
 }
 
-/* input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
-} */
+}
 
 .lose img {
     width: 210px;
