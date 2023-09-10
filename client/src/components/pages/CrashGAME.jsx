@@ -70,162 +70,6 @@ function CrashGAME() {
         }
     }, [count, isCounting, finalResult]);
 
-    // initialize data
-    const initialData = {
-        labels: [],
-        datasets: [
-            {
-                label: 'Height (1n cm)',
-                data: [], // Empty array for data points
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 5,
-                fill: true, // Fill the area under the line
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Fill color
-            },
-        ],
-    };
-
-    // initialize chartData
-    const [chartData, setChartData] = useState(initialData);
-
-    // animation
-    useEffect(() => {
-
-        if (buttonStart) {
-
-            const interval = setInterval(() => {
-                if (animationData.x < secondsMin || animationData.y < secondsMax) {
-                    setAnimationData({
-                        x: Math.min(animationData.x + (secondsMin / 40000) * 25, secondsMin),
-                        y: Math.min(animationData.y + (secondsMax / 40000) * 10, secondsMax),
-                    });
-
-                    setChartData((progressed) => ({
-                        ...progressed,
-                        datasets: [
-                            {
-                                ...progressed.datasets[0],
-                                data: [
-                                    ...progressed.datasets[0].data,
-                                    { x: animationData.x, y: animationData.y },
-                                ],
-                            },
-                        ],
-                    }));
-
-                    const progressY = (animationData.y / secondsMax) + 1;
-                    // Do something with progressY
-                    setResultTimes(animationData.y);
-                    // console.log(parseInt(animationData.y));
-
-                    if (parseInt(progress) > 0) {
-                        if (parseInt(progressValue) === animationData.y) {
-                            console.log('testin');
-                        }
-                    }
-
-                    if (parseInt(animationData.y) === randNumber) {
-
-                        setAnimationData({ x: 0, y: 1 });
-                        // reset the datasets
-                        setChartData(initialData);
-
-                        clearInterval(interval);
-                        setButtonStart(false);
-                        setCashOut(false);
-                        setWaiting(false);
-
-                        // stop the starting audio
-                        audio.pause();
-                        audio.currentTime = 0;
-
-                        // reset number
-                        setNumber(0);
-
-                        if (cashOut) {
-                            // play failed audio
-                            audioFailed.play();
-                            setFailedImage(true);
-                            setTimeout(() => {
-                                setFailedImage(false);
-                            }, 5000);
-                        }
-                    }
-                } else {
-                    clearInterval(interval);
-                    // Animation completed
-                }
-            }, 50);
-
-            return () => {
-                clearInterval(interval);
-            };
-        }
-    }, [buttonStart, animationData]);
-
-    const [expandBalance, setExpandBalance] = useState(false); // expand balance number
-
-    // start button
-    const start = () => {
-
-        if (number > balance) {
-            alert("Low Balance!");
-            setNumber(0);
-        }
-        else {
-
-            // conditions or random number for stop
-            const randomNumber = Math.random() * 100;
-
-            if (randomNumber <= 85) {
-                // 85% chance
-                const random = Math.floor(Math.random() * 6) + 1;
-                setRandNumber(random);
-            } else if (randomNumber <= 95) {
-                // 10% chance
-                const random = Math.floor(Math.random() * 5) + 6;
-                setRandNumber(random);
-            } else {
-                // 10% chace
-                const random = Math.floor(Math.random() * 20) + 11;
-                setRandNumber(random);
-            }
-
-            // reset the datasets
-            setChartData(initialData);
-
-            // play the audio
-            audio.play();
-            setButtonStart(true);
-            setCashOut(true);
-
-            // hide failed image
-            setFailedImage(false);
-
-            // deduct the balance
-            if (balance >= number) {
-                setBalance(balance - number);
-            }
-
-            setProgressValue(progress);
-
-        }
-    };
-
-    // cashout button
-    const cashOutBtn = () => {
-        setCashOut(false);
-        setWaiting(true);
-
-        coins.play();
-        setExpandBalance(true);
-        setBalance(parseInt((number * resultTimes) + balance));
-        setTimeout(() => {
-            setExpandBalance(false);
-        }, 1000);
-    }
-
-
     const options = {
         scales: {
 
@@ -292,10 +136,179 @@ function CrashGAME() {
         },
     };
 
+    // initialize data
+    const initialData = {
+        labels: [],
+        datasets: [
+            {
+                label: 'Height (1n cm)',
+                data: [], // Empty array for data points
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 5,
+                fill: true, // Fill the area under the line
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Fill color
+            },
+        ],
+    };
+
+    // initialize chartData
+    const [chartData, setChartData] = useState(initialData);
+
+    // animation
+    useEffect(() => {
+
+        if (buttonStart) {
+
+            const interval = setInterval(() => {
+                if (animationData.x < secondsMin || animationData.y < secondsMax) {
+                    setAnimationData({
+                        x: Math.min(animationData.x + (secondsMin / 40000) * 25, secondsMin),
+                        y: Math.min(animationData.y + (secondsMax / 40000) * 10, secondsMax),
+                    });
+
+                    if (maxLimitY < animationData.y) {
+                        setMaxLimitY(parseInt(animationData.y));
+                    }
+                    if (maxLimitX < animationData.x) {
+                        setMaxLimitX(parseInt(animationData.x));
+                    }
+
+                    setChartData((progressed) => ({
+                        ...progressed,
+                        datasets: [
+                            {
+                                ...progressed.datasets[0],
+                                data: [
+                                    { x: animationData.x, y: animationData.y },
+                                    ...progressed.datasets[0].data,
+                                ],
+                            },
+                        ],
+                    }));
+
+                    const progressY = (animationData.y / secondsMax) + 1;
+                    // Do something with progressY
+                    setResultTimes(animationData.y);
+                    // console.log(parseInt(animationData.y));
+
+                    // if (parseInt(progress) > 0) {
+                    //     if (parseInt(progressValue) === animationData.y) {
+                    //         console.log('testin');
+                    //     }
+                    // }
+
+                    if (parseInt(animationData.y) === randNumber) {
+
+                        setChartData((progressed) => ({
+                            ...progressed,
+                            datasets: [
+                                {
+                                    ...progressed.datasets[0],
+                                    backgroundColor: 'rgb(189, 26, 26)',
+                                    borderColor: 'rgb(119, 40, 40)'
+                                },
+                            ],
+                        }));
+
+                        setAnimationData({ x: 0, y: 1 });
+                        // reset the datasets
+                        // setChartData(initialData);
+
+                        clearInterval(interval);
+                        setButtonStart(false);
+                        setCashOut(false);
+                        setWaiting(false);
+
+                        // stop the starting audio
+                        audio.pause();
+                        audio.currentTime = 0;
+
+                        // reset number
+                        setNumber(0);
+
+                        audioFailed.play();
+                    }
+                } else {
+                    clearInterval(interval);
+                    // Animation completed
+                }
+            }, 50);
+
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [buttonStart, animationData]);
+
+    const [expandBalance, setExpandBalance] = useState(false); // expand balance number
+
+    // start button
+    const start = () => {
+
+        if (number > balance) {
+            alert("Low funds alert!");
+            setNumber(0);
+        }
+        else {
+            // reset the maxLimitX and Y
+            setMaxLimitX(20);
+            setMaxLimitY(10);
+
+            // conditions or random number for stop
+            const randomNumber = Math.random() * 100;
+
+            if (randomNumber <= 85) {
+                // 85% chance
+                const random = Math.floor(Math.random() * 6) + 1;
+                setRandNumber(random);
+            } else if (randomNumber <= 95) {
+                // 10% chance
+                const random = Math.floor(Math.random() * 5) + 6;
+                setRandNumber(random);
+            } else {
+                // 10% chace
+                const random = Math.floor(Math.random() * 20) + 11;
+                setRandNumber(random);
+            }
+
+            // reset the datasets
+            setChartData(initialData);
+
+            // play the audio
+            audio.play();
+            setButtonStart(true);
+            setCashOut(true);
+
+            // hide failed image
+            setFailedImage(false);
+
+            // deduct the balance
+            if (balance >= number) {
+                setBalance(balance - number);
+            }
+
+            setProgressValue(progress);
+
+        }
+    };
+
+    // cashout button
+    const cashOutBtn = () => {
+        setCashOut(false);
+        setWaiting(true);
+
+        coins.play();
+        setExpandBalance(true);
+        setBalance(parseInt((number * resultTimes) + balance));
+        setTimeout(() => {
+            setExpandBalance(false);
+        }, 1000);
+    }
+
     return (
         <div>
             <div className='chart'>
-                <div className='chart-table'>
+                <div className='chart-table' style={{ position: 'relative' }}>
                     <Line data={chartData} options={options} />
                 </div>
 
@@ -312,41 +325,11 @@ function CrashGAME() {
                 </div>
 
                 {/* result in times */}
-                <div className='result-times' style={{ display: buttonStart ? 'block' : 'none' }}>
+                <div className='result-times' >
                     <span style={{ fontSize: '45px' }}>{resultTimes.toFixed(2)}x</span>
                 </div>
 
-                {/* lose image */}
-                <div className='lose' style={{ display: failedImage ? 'block' : 'none' }} >
-                    <img src={lose} alt="" />
-                </div>
-
-                {/* failed result */}
-                <div className='you-lose' style={{ display: failedImage ? 'block' : 'none' }}>
-                    <span>You lose!</span>
-                </div>
-
                 <div className='betting-area' style={{ alignItems: 'center', pointerEvents: buttonStart ? 'none' : '', filter: buttonStart ? 'blur(0.5px)' : '' }}>
-                    <div className='beat-list'>
-                        <div className='beat-span color1' onClick={() => { setNumber(1); clicked.play(); }}>
-                            <span>1</span>
-                        </div>
-                        <div className='beat-span-right color2' onClick={() => { setNumber(10); clicked.play(); }}>
-                            <span>10</span>
-                        </div>
-                        <div className='beat-span color3' onClick={() => { setNumber(20); clicked.play(); }}>
-                            <span>20</span>
-                        </div>
-                        <div className='beat-span-right color4' onClick={() => { setNumber(50); clicked.play(); }}>
-                            <span>50</span>
-                        </div>
-                        <div className='beat-span color5' onClick={() => { setNumber(100); clicked.play(); }}>
-                            <span>100</span>
-                        </div>
-                        <div className='beat-span-right color6' onClick={() => { setNumber(200); clicked.play(); }}>
-                            <span>200</span>
-                        </div>
-                    </div>
 
                     <div className='plus-minus'>
                         <div className='minus' onClick={() => { setNumber(number - 1); clicked.play() }}>
@@ -404,7 +387,7 @@ function CrashGAME() {
                 </audio>
             </div>
 
-        </div>
+        </div >
 
     );
 }
