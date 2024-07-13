@@ -19,7 +19,7 @@ function CrashGAME() {
     const [coins] = useState(new Audio(buttonClickCoins));
 
     // initialize label on x and y axes
-    const [resultTimes, setResultTimes] = useState(1);
+    const [resultTimes, setResultTimes] = useState(0);
     const [maxLimitX, setMaxLimitX] = useState(20);
     const [maxLimitY, setMaxLimitY] = useState(10);
 
@@ -188,7 +188,8 @@ function CrashGAME() {
 
                     const progressY = (animationData.y / secondsMax) + 1;
                     // Do something with progressY
-                    setResultTimes(animationData.y);
+                    // setResultTimes(animationData.y);
+                    setResultTimes((prev) => prev + 0.01);
                     // console.log(parseInt(animationData.y));
 
                     // if (parseInt(progress) > 0) {
